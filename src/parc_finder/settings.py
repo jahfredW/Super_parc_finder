@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,6 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-$$ha$2mcq!3f+(h^k(*z%sccl+5^1(v1id3++13sjpg-$)+m&e'
+
+GOOGLE_MAPS_API_KEY = 'AIzaSyCphzbjdLf91qt61CHxKaFXvleLtnVgk7E'
+EASY_MAPS_GOOGLE_KEY = 'AIzaSyCphzbjdLf91qt61CHxKaFXvleLtnVgk7E'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_google_maps',
+    'parc',
+    'easy_maps',
 ]
+
+EASY_MAPS_CENTER = (-41.3, 32)
+EASY_MAPS_LANGUAGE = 'fr'
+EASY_MAPS_ZOOM = 10
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
