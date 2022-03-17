@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav>
+    <a href="{% url 'parc:home' %}">Accueil</a>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'parc:create' %}">Ajouter un Parc</a>
+    <a href="{% url 'parc:search' %}">Chercher un Parc</a>
+    {% endif %}
+
+
+</nav>
+
+<section id="blog">
+    {% block content %}
+    {% endblock %}
+</section>
+
+</body>
+</html>

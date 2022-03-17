@@ -3,6 +3,7 @@ from django.db import models
 from django_google_maps import fields as map_fields
 from django.template.defaultfilters import slugify
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 # Create your models here.
 
 class Parc(models.Model):
@@ -12,6 +13,7 @@ class Parc(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class Adress(models.Model):
     adress = models.TextField(blank=True)
@@ -24,6 +26,7 @@ User = get_user_model()
 
 class Location(models.Model):
     name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     address_1 = models.CharField(max_length=128)
     precision = models.TextField(max_length=1000, blank=True)
     thumbnail = models.ImageField(blank=True, upload_to='blog')
@@ -38,10 +41,13 @@ class Location(models.Model):
         verbose_name = "Parc"
 
     def __str__(self):
-        return self.title
+        return self.name
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.name)
 
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('parc:home')
