@@ -6,16 +6,19 @@
 
 {% block content %}
 
-<h1>Parc-Finder, plus jamais seul avec EUX</h1>
 
 
-    {% for entry in queryset %}
+
     {% if recherche in entry.name %}
+    {% for entry in queryset %}
     <div>
     {{ entry.name }}
     {{ entry.city }}
     </div>
-    {% endif %}
     {% endfor %}
+    {% else %}
+    <h1>DESOLE, Aucun parc ne correspond</h1>
+    {% endif %}
+
 
 {% endblock %}
