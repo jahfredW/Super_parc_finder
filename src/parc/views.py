@@ -27,6 +27,13 @@ class ParcCreate(CreateView):
     fields = ['name']
 
 
+class ParcList(ListView):
+    model = Location
+    template_name = 'parc/derniers_parc.html'
+    context_object_name = 'location'
+    fields = '__all__'
+
+
 def search_parc(request):
 
     queryset = Location.objects.all()

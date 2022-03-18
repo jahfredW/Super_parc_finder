@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load easy_maps_tags %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+{% for parc in location %}
+<br>
+<div><a href="">{{ parc.name|safe }}</a> publié par {{ parc.author|safe }}</div>
+{% if parc.address_1 %}
+<div><b>Adresse : {{ parc.address_1|safe}}</b> à <b> {{ parc.city }}, {{ parc.postal_code }}</b> </div>
+{% endif %}
+{% if parc.thumbnail %}
+<img src="{{ parc.thumbnail.url }}" alt="image_du_parc">
+{% endif %}
+<br>
+{% endfor %}
+{% endblock %}
+
+</body>
+</html>
