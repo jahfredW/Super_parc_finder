@@ -24,6 +24,7 @@ class ParcHome(ListView):
 class ParcCreate(CreateView):
     model = Location
     template_name = "parc/parc_create.html"
+    context_object_name = 'location'
     fields = ['name']
 
 
