@@ -19,5 +19,5 @@ from parc.views import Location
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('parc/', include('parc.urls')),
+    path('', include('parc.urls')),
 ]

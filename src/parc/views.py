@@ -33,12 +33,10 @@ def search_parc(request):
 
     if request.method == 'POST':
         form = SearchForm(request.POST)
+        recherche = str(form['adress'])
         if form.is_valid():
-            recherche = form.cleaned_data
-            print(recherche)
-            for entry in queryset:
-                if recherche['adress'] in entry.name:
-                    return render(request, 'parc/list.html')
+            recherche = form.cleaned_data['adress']
+            return render(request, 'parc/list.html', context={'form': form, 'queryset': queryset, 'recherche': recherche})
 
     else:
         form = SearchForm()
