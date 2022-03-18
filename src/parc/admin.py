@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django_google_maps import widgets as map_widgets
 from django_google_maps import fields as map_fields
-from parc.models import Parc
+from parc.models import Location
 
 # Register your models here.
 
 class ParcAdmin(admin.ModelAdmin):
-    list_display = ['title',]
+    list_display = ('name', 'slug',)
     formfield_overrides = {
         map_fields.AddressField: {
             'widget': map_widgets.GoogleMapsAddressWidget(attrs={'data-map-type': 'roadmap'})
@@ -14,4 +14,4 @@ class ParcAdmin(admin.ModelAdmin):
     }
 
 
-admin.site.register(Parc, ParcAdmin)
+admin.site.register(Location, ParcAdmin)
