@@ -36,14 +36,28 @@ class ParcList(ListView):
 
 def search_parc(request):
 
+    ok = False
     queryset = Location.objects.all()
 
     if request.method == 'POST':
         form = SearchForm(request.POST)
-        recherche = str(form['adress'])
+
         if form.is_valid():
             recherche = form.cleaned_data['adress']
+            # ici il y a un truc à faire.
+            # on récupère recherche et on mate si il correspond avec l'adresse
+
+        for entry in queryset:
+            adress = entry.adresse()
+            if recherche.lower() in adress or recherche.lower( ) in entry.name:
+                ok = True
+                break
+
+        if ok:
             return render(request, 'parc/list.html', context={'form': form, 'queryset': queryset, 'recherche': recherche})
+
+        else:
+            return HttpResponse("Aucun resutat")
 
     else:
         form = SearchForm()

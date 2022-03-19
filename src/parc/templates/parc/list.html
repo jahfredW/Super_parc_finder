@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load easy_maps_tags %}
 
 {% block title %}
 <title>Accueil du blog</title>
@@ -10,10 +11,11 @@
 
 
     {% for entry in queryset %}
-    {% if recherche in entry.name %}
+    {% if recherche|lower in entry.adresse or recherche|lower in entry.name %}
     <div>
     {{ entry.name }}
     {{ entry.city }}
+        {% easy_map entry.adresse 300 400 %}
     </div>
     {% endif %}
     {% endfor %}
