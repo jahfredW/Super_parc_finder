@@ -4,7 +4,7 @@ from django_google_maps import fields as map_fields
 from django.template.defaultfilters import slugify
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from imagekit.models import ImageSpecField
+from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 # Create your models here.
 
@@ -31,9 +31,11 @@ class Location(models.Model):
     slug = models.SlugField(max_length=255, unique=True, blank=True) # le slug
     address_1 = models.CharField(max_length=128) # la première partie de l'adresse
     precision = models.TextField(max_length=1000, blank=True) # eventuellement des précisions
-    thumbnail = models.ImageField(blank=True, upload_to='parc') # une image
     # permet de resizer une image, le top et evite de faire à la main.
-    thumbnail_resize = ImageSpecField(source='thumbnail', processors=[ResizeToFill(200, 100)], format='JPEG',options={'quality' : 60})
+    thumbnail = ProcessedImageField(upload_to='parc',
+                                           processors=[ResizeToFill(100, 50)],
+                                           format='JPEG',
+                                           options={'quality': 60})
     city = models.CharField(max_length=64, default="Dunkerque") # la ville
     postal_code = models.CharField(max_length=5, default="59240") # Le code Postal
     created_on = models.DateField(blank=True, null=True) # La date de création

@@ -16,6 +16,9 @@
     {{ entry.name }}
     {{ entry.city }}
         {% easy_map entry.adresse 300 400 %}
+        {% if entry.thumbnail %}
+        <img src="{{ entry.thumbnail.url }}" alt="image_du_parc">
+        {% endif %}
     </div>
     {% endif %}
     {% endfor %}

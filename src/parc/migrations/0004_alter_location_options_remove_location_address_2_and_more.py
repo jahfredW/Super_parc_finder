@@ -39,6 +39,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='location',
             name='thumbnail',
-            field=models.ImageField(blank=True, upload_to='blog'),
+            field=models.ImageField(blank=True, upload_to='parc'),
         ),
     ]

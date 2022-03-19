@@ -15,8 +15,8 @@
 {% if parc.address_1 %}
 <div><b>Adresse : {{ parc.address_1|safe}}</b> à <b> {{ parc.city }}, {{ parc.postal_code }}</b> </div>
 {% endif %}
-{% if parc.thumbnail %}
-<img src="{{ parc.thumbnail_resize.url }}" alt="image_du_parc">
+{% if parc.thumbnail%}
+<img src="{{ parc.thumbnail.url }}" alt="image_du_parc">
 {% endif %}
 <br>
 {% easy_map parc.adresse 300 400 %}
