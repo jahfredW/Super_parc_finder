@@ -8,6 +8,9 @@ from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 # Create your models here.
 
+
+
+
 class Parc(models.Model):
     title = models.CharField(max_length=50, blank=False)
     adress = map_fields.AddressField(max_length=200)
@@ -24,6 +27,45 @@ class Adress(models.Model):
         return self.adress
 
 User = get_user_model()
+
+
+
+class Abus(models.Model):
+    INAP = 'IN'
+    INSULTES = 'IS'
+    NUDITE = 'NU'
+    INFOS_ERRONEES = 'ER'
+    FAUX_COMPTE = 'FA'
+    MOTIF_CHOICES = [
+        (INAP, 'Contenu inapproprié'),
+        (INSULTES, 'Insultes_propos choquants'),
+        (NUDITE, 'Nudité'),
+        (INFOS_ERRONEES, 'Informations erronées'),
+        (FAUX_COMPTE, 'Faux comptes'),
+    ]
+    motif = models.CharField(
+        max_length=2,
+        choices=MOTIF_CHOICES,
+        default=INAP,
+    )
+
+    parc_name = models.CharField(blank=True, max_length=20)
+    contexte = models.TextField(blank=True)
+    date = models.DateField(blank=True, auto_now_add=True)  # La date de création
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    traite = models.BooleanField(blank=True, editable=True)
+
+    class Meta:
+        ordering = ['-date'] #ordre d'affichage du plus récent au moins récent
+        verbose_name = "Abu"
+
+
+    def get_absolute_url(self):
+        return reverse('parc:home')
+
+    def __str__(self):
+        return self.name
+
 
 
 class Location(models.Model):

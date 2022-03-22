@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponse
 from parc.models import Adress
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
-from parc.models import Location
+from parc.models import Location, Abus
 
 from parc_finder.forms import SearchForm
 
@@ -25,6 +25,12 @@ class ParcCreate(CreateView):
     model = Location
     template_name = "parc/parc_create.html"
     fields = ['name']
+
+class AbusCreate(CreateView):
+    model = Abus
+    template_name = "parc/abus_form.html"
+    fields = "__all__"
+    context_object_name = "abus"
 
 
 class ParcList(ListView):
