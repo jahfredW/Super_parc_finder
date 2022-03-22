@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponse
 from parc.models import Adress
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
-from parc.models import Location
+from parc.models import Location, Abus
 
 from parc_finder.forms import SearchForm
 
@@ -18,7 +18,7 @@ class ParcHome(ListView):
         if self.request.user.is_authenticated:
             return queryset
 
-        return queryset.filter(published=True)
+        return queryset.filter()
 
 
 class ParcCreate(CreateView):
@@ -26,6 +26,12 @@ class ParcCreate(CreateView):
     template_name = "parc/parc_create.html"
     context_object_name = 'location'
     fields = ['name']
+
+class AbusCreate(CreateView):
+    model = Abus
+    template_name = "parc/abus_form.html"
+    fields = "__all__"
+    context_object_name = "abus"
 
 
 class ParcList(ListView):
@@ -37,15 +43,36 @@ class ParcList(ListView):
 
 def search_parc(request):
 
+    ok = False
     queryset = Location.objects.all()
 
     if request.method == 'POST':
         form = SearchForm(request.POST)
+<<<<<<< HEAD
         if form.is_valid():
             recherche = form.cleaned_data['adress']
 
             return render(request, 'parc/list.html', context={'form': form, 'queryset': queryset, 'recherche': recherche})
 
+=======
+
+        if form.is_valid():
+            recherche = form.cleaned_data['adress']
+            # ici il y a un truc à faire.
+            # on récupère recherche et on mate si il correspond avec l'adresse
+
+        for entry in queryset:
+            adress = entry.adresse()
+            if recherche.lower() in adress or recherche.lower( ) in entry.name:
+                ok = True
+                break
+
+        if ok:
+            return render(request, 'parc/list.html', context={'form': form, 'queryset': queryset, 'recherche': recherche})
+
+        else:
+            return HttpResponse("Aucun resutat")
+>>>>>>> feature_view
 
     else:
         form = SearchForm()
