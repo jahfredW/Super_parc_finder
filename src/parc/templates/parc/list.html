@@ -18,6 +18,8 @@
         {% easy_map entry.adresse 300 400 %}
         {% if entry.thumbnail %}
         <img src="{{ entry.thumbnail.url }}" alt="image_du_parc">
+        {% else %}
+        <h2>Aucune image disponible pour l'instant</h2>
         {% endif %}
     </div>
     {% endif %}

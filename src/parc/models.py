@@ -32,10 +32,12 @@ class Location(models.Model):
     address_1 = models.CharField(max_length=128) # la première partie de l'adresse
     precision = models.TextField(max_length=1000, blank=True) # eventuellement des précisions
     # permet de resizer une image, le top et evite de faire à la main.
-    thumbnail = ProcessedImageField(upload_to='parc',
-                                           processors=[ResizeToFill(100, 50)],
-                                           format='JPEG',
-                                           options={'quality': 60})
+    thumbnail = models.ImageField(blank=True, upload_to='parc')
+    resize_thumbnail = ImageSpecField(source='thumbnail',
+                                      processors=[ResizeToFill(100, 50)],
+                                      format='JPEG',
+                                      options={'quality': 60})
+
     city = models.CharField(max_length=64, default="Dunkerque") # la ville
     postal_code = models.CharField(max_length=5, default="59240") # Le code Postal
     created_on = models.DateField(blank=True, null=True) # La date de création
