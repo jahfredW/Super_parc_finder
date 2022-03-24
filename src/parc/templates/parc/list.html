@@ -7,14 +7,11 @@
 
 {% block content %}
 
-<h1>Parc-Finder, plus jamais seul avec EUX</h1>
-
-
     {% for entry in queryset %}
     {% if recherche|lower in entry.adresse or recherche|lower in entry.name %}
     <div>
-    {{ entry.name }}
-    {{ entry.city }}
+        <a href="{% url 'parc:details' slug=entry.slug %}">Nom du Parc :{{ entry.name }}</a>
+        {{ entry.city }}
         {% easy_map entry.adresse 300 400 %}
         {% if entry.thumbnail %}
         <img src="{{ entry.resize_thumbnail.url }}" alt="image_du_parc">

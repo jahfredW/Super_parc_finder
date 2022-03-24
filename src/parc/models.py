@@ -65,7 +65,7 @@ class Abus(models.Model):
         return reverse('parc:home')
 
     def __str__(self):
-        return self.name
+        return self.parc_name
 
 
 

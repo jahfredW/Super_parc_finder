@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load easy_maps_tags %}
+
+{% block title %}
+    <title>{{ post.title }}</title>
+{% endblock %}
+
+{% block content %}
+    <article class="post-detail">
+        <h1>{{ parc.name }}</h1>
+        {% if parc.resize_thumbnail %}
+        <img src="{{ parc.resize_thumbnail.url }}" alt="L'image du parc">
+        {% endif %}
+        <div>Code Postal{{ parc.address_1|safe }}</div>
+        <div>Code Postal{{ parc.postal_code|safe }}</div>
+        <div>Ville :{{ parc.city|safe }}</div>
+        <div>Description :{{ parc.content|safe }}</div>
+        <div>{% easy_map parc.adresse 300 400 %}</div>
+        <div>Créer le :{{ parc.created_on|safe }}</div>
+        <div>Par: {{ parc.author|safe }}</div>
+
+    </article>
+{% endblock %}

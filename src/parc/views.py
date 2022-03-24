@@ -1,10 +1,13 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
+from django.urls import reverse_lazy
+
 from parc.models import Adress
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from parc.models import Location, Abus
 
-from parc_finder.forms import SearchForm
+from parc_finder.forms import SearchForm, ParcCreateForm
 
 # Create your views here.
 
@@ -22,18 +25,26 @@ class ParcHome(ListView):
 
 
 class ParcCreate(CreateView):
-    model = Location
-    template_name = "parc/parc_create.html"
-    fields = ['name', 'address_1', 'postal_code', 'city', 'thumbnail', 'author',]
-    context_object_name = "parc"
+    template_name = 'parc/parc_create.html'
+    form_class = ParcCreateForm
+    success_url = reverse_lazy('parc:home')
 
-    """
-    def clean_title(self):
-        adresse = self.cleaned_data['adress_1']
-        if Location.objects.filter(adresse=adresse).exists():
-            raise forms.ValidationError("You have already written a book with same title.")
-        return adresse
-    """
+    def form_valid(self, form):
+        queryset = Location.objects.all()
+        for entry in queryset:
+            if entry.name.lower().replace('é', 'e') == form.instance.name.lower().replace("é", 'e'):
+                return render(self.request, 'parc/already_existing.html', context={"entry": entry})
+            if form.instance.address_1.lower().replace("é", 'e') in entry.adresse():
+                return HttpResponse('Parc existe déja')
+
+        return super().form_valid(form)
+
+
+class ParcDetails(DetailView):
+    model = Location
+    template_name = "parc/parc_details.html"
+    context_object_name = 'parc'
+
 
 class AbusCreate(CreateView):
     model = Abus
@@ -77,7 +88,7 @@ def search_parc(request):
             return render(request, 'parc/list.html', context={'form': form, 'queryset': queryset, 'recherche': recherche})
 
         else:
-            return HttpResponse("Aucun resutat")
+            return render(request, 'parc/404_parc.html')
 
     else:
         form = SearchForm()

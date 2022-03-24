@@ -1,5 +1,5 @@
 from django.urls import path
-from parc.views import ParcCreate, ParcHome, search_parc, ParcList, AbusCreate
+from parc.views import ParcCreate, ParcHome, search_parc, ParcList, AbusCreate, ParcDetails
 
 app_name = "parc"
 
@@ -8,5 +8,6 @@ urlpatterns = [
     path('create/', ParcCreate.as_view(), name='create'),
     path('search/', search_parc, name='search'),
     path('parc/', ParcList.as_view(), name='liste'),
-    path('abus/', AbusCreate.as_view(), name='abus')
+    path('abus/', AbusCreate.as_view(), name='abus'),
+    path('<str:slug>/', ParcDetails.as_view(), name='details'),
 ]
