@@ -24,7 +24,16 @@ class ParcHome(ListView):
 class ParcCreate(CreateView):
     model = Location
     template_name = "parc/parc_create.html"
-    fields = ['name']
+    fields = ['name', 'address_1', 'postal_code', 'city', 'thumbnail', 'author',]
+    context_object_name = "parc"
+
+    """
+    def clean_title(self):
+        adresse = self.cleaned_data['adress_1']
+        if Location.objects.filter(adresse=adresse).exists():
+            raise forms.ValidationError("You have already written a book with same title.")
+        return adresse
+    """
 
 class AbusCreate(CreateView):
     model = Abus
@@ -44,18 +53,23 @@ def search_parc(request):
 
     ok = False
     queryset = Location.objects.all()
+    print(queryset)
 
     if request.method == 'POST':
         form = SearchForm(request.POST)
 
         if form.is_valid():
             recherche = form.cleaned_data['adress']
+            recherche = recherche.replace('é', 'e')
+            print(recherche)
             # ici il y a un truc à faire.
             # on récupère recherche et on mate si il correspond avec l'adresse
 
         for entry in queryset:
             adress = entry.adresse()
-            if recherche.lower() in adress or recherche.lower( ) in entry.name:
+            print(entry.name)
+            print(adress)
+            if recherche.lower() in adress.replace('é', 'e') or recherche.lower() in entry.name.replace('é', 'e'):
                 ok = True
                 break
 

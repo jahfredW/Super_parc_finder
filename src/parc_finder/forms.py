@@ -5,3 +5,4 @@ class SearchForm(forms.Form):
 
 class AbusForm(forms.BaseForm):
     motif = forms.ChoiceField()
+

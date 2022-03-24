@@ -1,18 +1,17 @@
-{% extends "base.html" %}
-{% load easy_maps_tags %}
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Ok pour l'instant tout fonctionne</h1>
-{% block content %}
-{% easy_map  300 400 %}
+{% block title %}
+<title>Ajouter un article</title>
 {% endblock %}
 
+{% block content %}
 
-</body>
-</html>
+<h1>Ajouter un Parc</h1>
+
+ <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Créer" class="btn btn-submit">
+</form>
+
+{% endblock %}
