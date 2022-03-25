@@ -8,14 +8,16 @@
 {% block content %}
     <article class="post-detail">
         <h1>{{ parc.name }}</h1>
-        {% if parc.resize_thumbnail %}
-        <img src="{{ parc.resize_thumbnail.url }}" alt="L'image du parc">
-        {% endif %}
+        <div class="images">
+            {% if parc.resize_thumbnail %}
+            <img src="{{ parc.resize_thumbnail.url }}" alt="L'image du parc">
+            {% endif %}
+            {% easy_map parc.adresse 300 400 %}
+        </div>
         <div>Code Postal{{ parc.address_1|safe }}</div>
         <div>Code Postal{{ parc.postal_code|safe }}</div>
         <div>Ville :{{ parc.city|safe }}</div>
         <div>Description :{{ parc.content|safe }}</div>
-        <div>{% easy_map parc.adresse 300 400 %}</div>
         <div>Créer le :{{ parc.created_on|safe }}</div>
         <div>Par: {{ parc.author|safe }}</div>
     </article>

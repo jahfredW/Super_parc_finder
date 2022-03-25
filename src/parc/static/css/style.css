@@ -12,6 +12,15 @@ body {
     margin-left: 2rem;
 }
 
+.images div {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
 nav {
     margin: 2rem;
     display: flex;
