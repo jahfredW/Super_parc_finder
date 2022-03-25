@@ -44,7 +44,7 @@ class ParcCreate(CreateView):
 
 class ParcDetails(DetailView):
     model = Location
-    template_name = "parc/parc_create.html"
+    template_name = "parc/parc_details.html"
     fields = ['name', 'address_1', 'postal_code', 'city', 'thumbnail', 'author', ]
     context_object_name = "parc"
 
