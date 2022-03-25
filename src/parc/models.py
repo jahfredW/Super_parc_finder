@@ -65,7 +65,7 @@ class Abus(models.Model):
         return reverse('parc:home')
 
     def __str__(self):
-        return self.parc_name
+        return self.name
 
 
 
@@ -77,7 +77,7 @@ class Location(models.Model):
     # permet de resizer une image, le top et evite de faire à la main.
     thumbnail = models.ImageField(blank=True, upload_to='parc')
     resize_thumbnail = ImageSpecField(source='thumbnail',
-                                      processors=[ResizeToFill(100, 50)],
+                                      processors=[ResizeToFill(200, 100)],
                                       format='JPEG',
                                       options={'quality': 60})
 
@@ -85,6 +85,7 @@ class Location(models.Model):
     postal_code = models.CharField(max_length=5, default="59240") # Le code Postal
     created_on = models.DateField(blank=True, auto_now_add=True) # La date de création
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
     # Auteur ( relation un à un avec utilisateur )
 
     # classe Meta
@@ -94,7 +95,7 @@ class Location(models.Model):
 
     # fonction qui permet de récupérer l'adresse sous forme d'une chaine de carcatère en minuscule
     def adresse(self):
-        self.adresse = f"{self.address_1},{self.postal_code},{self.city}"
+        self.adresse = f"{self.name},{self.address_1},{self.city}"
         return self.adresse.lower().replace('é', 'e')
 
     def __str__(self):

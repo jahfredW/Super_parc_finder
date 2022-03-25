@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 
 EASY_MAPS_CENTER = (-41.3, 32)
 EASY_MAPS_LANGUAGE = 'fr'
-EASY_MAPS_ZOOM = 10
+EASY_MAPS_ZOOM = 13
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
