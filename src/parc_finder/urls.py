@@ -21,5 +21,6 @@ from parc_finder import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('parc.urls')),
+    path('', include('account.urls')),
+    path('parc', include('parc.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

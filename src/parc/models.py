@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
+from account.models import CustomUSer
 from datetime import date
 # Create your models here.
 
@@ -27,7 +28,7 @@ class Adress(models.Model):
     def __str__(self):
         return self.adress
 
-User = get_user_model()
+#User = get_user_model()
 
 
 
@@ -53,7 +54,7 @@ class Abus(models.Model):
     parc_name = models.CharField(blank=True, max_length=20)
     contexte = models.TextField(blank=True)
     date = models.DateField(blank=True, auto_now_add=True)  # La date de création
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    author = models.ForeignKey(CustomUSer, on_delete=models.SET_NULL, null=True, blank=True)
     traite = models.BooleanField(blank=True, editable=True)
 
     class Meta:
@@ -84,7 +85,7 @@ class Location(models.Model):
     city = models.CharField(max_length=64, default="Dunkerque") # la ville
     postal_code = models.CharField(max_length=5, default="59240") # Le code Postal
     created_on = models.DateField(blank=True, auto_now_add=True) # La date de création
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    author = models.ForeignKey(CustomUSer, on_delete=models.SET_NULL, null=True, blank=True)
 
     # Auteur ( relation un à un avec utilisateur )
 
