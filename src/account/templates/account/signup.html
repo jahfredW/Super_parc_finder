@@ -1,25 +1,17 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Créer un compte</title>
 </head>
 <body>
-
 <form method="POST">
-  {% csrf_token %}
+    {% csrf_token %}
 
-  <label for="email">email</label>
-  <input type="text" id="email" name="email">
-  <label for="password1">Mot de Passe</label>
-  <input type="password" id="password1" name="password1">
-    <label for="password2">Confirmation</label>
-    <input type="password" id="password2" name="password2">
-    {% if error %}
-    <small style="color: red;">
+    {{ form.as_p }}
+    {% for error in errors.values %}
         {{ error }}
-    </small>
-    {% endif %}
+    {% endfor %}
 
     <input type="submit" value="S'inscrire">
 </form>

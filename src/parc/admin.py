@@ -23,5 +23,6 @@ class AbusAdmin(admin.ModelAdmin):
     list_display = ('motif', 'contexte', 'date', 'author', 'parc_name','traite',)
     list_editable = ('traite', 'parc_name',)
 
+
 admin.site.register(Location, ParcAdmin)
 admin.site.register(Abus, AbusAdmin)
