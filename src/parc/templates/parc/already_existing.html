@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% block content %}
+    <h1>Désolé, mais il semblerait que le parc existe déja</h1>
+<a href="{% url 'parc:details' slug=entry.slug %}">{{ entry.name }}{{ entry.address_1 }}</a>
+{% endblock %}
+</html>

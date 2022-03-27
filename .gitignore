@@ -1,3 +1,4 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -60,6 +61,7 @@ coverage.xml
 local_settings.py
 src/db.sqlite3
 db.sqlite3-journal
+./src/db.sqlite3
 
 # Flask stuff:
 instance/
@@ -103,8 +105,9 @@ celerybeat.pid
 
 # Environments
 .env
-<<<<<<< HEAD
-=======
+
+../.env/
+
 .idea/
 mediafiles/
 # Byte-compiled / optimized / DLL files
@@ -212,9 +215,9 @@ celerybeat.pid
 
 # Environments
 .env
->>>>>>> feature_liste
+
 .venv
-env/
+.env/
 venv/
 ENV/
 env.bak/

@@ -8,7 +8,7 @@ from imagekit.admin import AdminThumbnail
 # Register your models here.
 
 class ParcAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'thumbnail')
+    list_display = ('name', 'slug', 'thumbnail', 'address_1', 'postal_code', 'city')
     list_editable = ('thumbnail',)
     admin_thumbnail = AdminThumbnail(image_field='thumbnail')
     formfield_overrides = {
@@ -22,6 +22,7 @@ class ParcAdmin(admin.ModelAdmin):
 class AbusAdmin(admin.ModelAdmin):
     list_display = ('motif', 'contexte', 'date', 'author', 'parc_name','traite',)
     list_editable = ('traite', 'parc_name',)
+
 
 admin.site.register(Location, ParcAdmin)
 admin.site.register(Abus, AbusAdmin)

@@ -14,14 +14,30 @@
 {% if parc.address_1 %}
 <div><b>Adresse : {{ parc.address_1|safe}}</b> à <b> {{ parc.city }}, {{ parc.postal_code }}</b> </div>
 {% endif %}
-{% if parc.resize_thumbnail%}
+{% if parc.resize_thumbnail %}
 <img src="{{ parc.resize_thumbnail.url }}" alt="image_du_parc">
-{% else %}
-<i>Aucune image ajoutée quand à présent</i>
 {% endif %}
 <br>
 {% easy_map parc.adresse 300 400 %}
 {% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}
 
 </body>

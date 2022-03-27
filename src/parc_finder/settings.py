@@ -47,11 +47,12 @@ INSTALLED_APPS = [
     'django_google_maps',
     'parc',
     'easy_maps',
+    'account',
 ]
 
 EASY_MAPS_CENTER = (-41.3, 32)
 EASY_MAPS_LANGUAGE = 'fr'
-EASY_MAPS_ZOOM = 10
+EASY_MAPS_ZOOM = 13
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -117,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-fr'
 
 TIME_ZONE = 'UTC'
 
@@ -139,3 +140,4 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = "account.CustomUser"
