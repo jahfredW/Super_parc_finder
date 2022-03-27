@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from parc.views import Location
 from parc_finder import settings
+from account.views import profile
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('account.urls')),
     path('parc', include('parc.urls')),
+    path('admin/', admin.site.urls),
+    path('compte/', include('django.contrib.auth.urls')),
+    path('accounts/profile/', profile, name="profile"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

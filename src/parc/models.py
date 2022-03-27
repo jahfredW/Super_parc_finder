@@ -7,9 +7,12 @@ from django.urls import reverse
 from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 from account.models import CustomUSer
+from django.conf import settings
 from datetime import date
 # Create your models here.
 
+
+User = settings.AUTH_USER_MODEL
 
 
 
@@ -85,7 +88,7 @@ class Location(models.Model):
     city = models.CharField(max_length=64, default="Dunkerque") # la ville
     postal_code = models.CharField(max_length=5, default="59240") # Le code Postal
     created_on = models.DateField(blank=True, auto_now_add=True) # La date de création
-    author = models.ForeignKey(CustomUSer, on_delete=models.SET_NULL, null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, editable=False)
 
     # Auteur ( relation un à un avec utilisateur )
 

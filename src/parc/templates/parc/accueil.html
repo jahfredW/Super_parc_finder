@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     {% block title %}
-    <h1>Bienvenue sur PARC-FINDER ! </h1>
+    <h1>Bienvenue {{ request.user.nom }} </h1>
     {% endblock %}
 </head>
 <body>

@@ -20,6 +20,9 @@ def signup(request):
     return render(request, "account/signup.html", context=context)
 
 
+def profile(request):
+    #return HttpResponse(f"Bienvenue {request.user.email}")
+    return redirect('parc:home')
 
 """
 def signup(request):

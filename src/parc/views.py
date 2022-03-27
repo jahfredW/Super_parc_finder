@@ -29,17 +29,19 @@ class ParcCreate(CreateView):
     form_class = ParcCreateForm
     success_url = reverse_lazy('parc:home')
 
+
     def form_valid(self, form):
+
+        print(self.request.user)
+        form.instance.author = self.request.user
         caca = form.instance.address_1.lower().replace('é', 'e')
-        print(caca)
         queryset = Location.objects.all()
         for entry in queryset:
             cucu = entry.adresse()
-            print(cucu)
             if form.instance.name.lower().replace('é', 'e') in cucu or caca in cucu:
                 return render(self.request, 'parc/already_existing.html', context={"entry": entry})
 
-        return super().form_valid(form)
+        return super(ParcCreate, self).form_valid(form)
 
 
 class ParcDetails(DetailView):

@@ -25,7 +25,7 @@ class MyUserManager(BaseUserManager):
 
 
 class CustomUSer(AbstractBaseUser):
-    nom = models.CharField(blank=False, unique=True, max_length=15, default='UserName')
+    nom = models.CharField(blank=False, max_length=15,)
     email = models.EmailField(blank=False, unique=True, max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

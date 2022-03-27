@@ -8,7 +8,7 @@ from imagekit.admin import AdminThumbnail
 # Register your models here.
 
 class ParcAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'thumbnail', 'address_1', 'postal_code', 'city')
+    list_display = ('name', 'slug', 'thumbnail', 'author', 'address_1', 'postal_code', 'city')
     list_editable = ('thumbnail',)
     admin_thumbnail = AdminThumbnail(image_field='thumbnail')
     formfield_overrides = {
@@ -16,7 +16,6 @@ class ParcAdmin(admin.ModelAdmin):
             'widget': map_widgets.GoogleMapsAddressWidget(attrs={'data-map-type': 'roadmap'})
         }
     }
-
 
 
 class AbusAdmin(admin.ModelAdmin):
